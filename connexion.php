@@ -45,8 +45,12 @@ while ($donnees = $reponse->fetch())
 }
 
 $reponse->closeCursor(); // Termine le traitement de la requête
+<input type="button" value="Afficher ou Maquer" onClick="masquer_div("a_masquer");"/>
+   <div id="a_masquer">
 
 */
+
+
    echo '<form name="formulaire" method="post" action="connexion.php">
                         <br><br><label>Nom:</label><br>
                         <input class="Test" type="text" size="40" name="pseudo" id="Name"><br><br>
@@ -57,5 +61,13 @@ $reponse->closeCursor(); // Termine le traitement de la requête
                         <label>E-mail:</label><br>
                         <input type="text" size="40" name="mail" id="email" onkeypress="return verif(event, id);"><br><br><br>
                         <button type="submit">S\'inscrire</button>
-                    </form><br><br></div>';
+                    </form><br><br></div></div>';
+
+    echo'<form name="formulaire_connexion" method="post" action="connexion.php">
+                        <br><br><label>Nom:</label><br>
+                        <input class="Test" type="text" size="40" name="pseudo_connexion" id="Name"><br><br>
+                        <label>Mot de Passe:</label><br>
+                        <input type="password" size="40" name="password_connexion"><br><br><br>
+                        <button type="submit">connexion</button>
+                    </form>';
 ?>
