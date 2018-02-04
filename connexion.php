@@ -4,7 +4,7 @@
 // Date: 18.06.2016
 // Auteur:VFI  
 
-
+session_start();
 //########################## Connexion DB ############################################
 try
 {
@@ -17,7 +17,7 @@ catch(Exception $e)
     die('Erreur : '.$e->getMessage());
 }
 //########################## Traitement (POST) ############################################
-extract($_POST); // $pseudo , $password . $mail . $pseudo_connexion . $password_connexion
+extract($_POST); // $pseudo , $password . $mail . $pseudo_connexion . $password_connexion $deco
 if(isset($pseudo) && isset($password) && isset($mail))
 {
     $stmt = $bdd->prepare('INSERT INTO `user` (`id_user`, `pseudo`, `password`, `mail`) VALUES (NULL, ?, ?, ?)');
@@ -35,14 +35,25 @@ if(isset($password_connexion) && isset($password_connexion))
         $ident = $stmt->fetch();
         if($ident['existe']>0)
         {
-            echo'ok';
+            $_SESSION['pseudo1'] = $pseudo_connexion;
         }
-        else
+        else 
         {
-        echo'not ok';
+            echo'not ok';
         }
 }
-
+if(isset($deco))
+    
+{
+    $_SESSION = array ();
+    session_destroy();
+    
+}
+extract($_SESSION); // $pseudo
+if(isset($pseudo1))
+{
+    echo "<html><a href='connexion.php'>$pseudo1</a></html>";
+}
 // ################################# Affichage du contenu de la page ##############################
 
  echo '<form name="formulaire" method="post" action="connexion.php">
@@ -65,5 +76,5 @@ if(isset($password_connexion) && isset($password_connexion))
                         <button type="submit">connexion</button>
                     </form>';
 
-
+echo'<form name="formulaired" method="post" action="connexion.php"> <button name="deco" value="deco" type="submit">deconnexion</button></form>';
 ?>
